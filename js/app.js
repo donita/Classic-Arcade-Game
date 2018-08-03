@@ -1,13 +1,16 @@
 // Enemies our player must avoid
+//enemy object constructor
 var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-};
+    this.sprite = 'images/enemy-bug.png'; //string to the png link in image folder
 
+
+
+//method handles the enemy movement and multiplies something called dt to nromalize game speed
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
@@ -16,6 +19,9 @@ Enemy.prototype.update = function(dt) {
     // all computers.
 };
 
+
+
+//renders the result of the previous method and uses html canvas
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -26,6 +32,9 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 
 
+
+
+//instantiate our enemies
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
