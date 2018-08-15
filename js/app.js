@@ -1,3 +1,7 @@
+const player = new Hero(); //store this new object
+
+
+
 // Enemies our player must avoid
 //enemy object constructor
 var Enemy = function() {
@@ -9,17 +13,15 @@ var Enemy = function() {
     this.sprite = 'images/enemy-bug.png'; //string to the png link in image folder
 
 
-
 //method handles the enemy movement and multiplies something called dt to nromalize game speed
 // Update the enemy's position, required method for game
+//method that handles enemy objects
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
 };
-
-
 
 //renders the result of the previous method and uses html canvas
 // Draw the enemy on the screen, required method for game
@@ -30,8 +32,17 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+class Hero {
+  constructor() {
+    this.x = 0;  //""""
+    this.y = 0; // top left corner of our canvas
+    this.sprite = 'images/char-boy.png'; //inside the image folder
+}
 
-
+render() {
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  }
+}
 
 
 //instantiate our enemies
