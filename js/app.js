@@ -1,11 +1,12 @@
 // Enemies our player must avoid
-class Enemy
+class Enemy {
  constructor(x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
-};
+  }
+}
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
