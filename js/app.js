@@ -1,12 +1,14 @@
 // Enemies our player must avoid
 var Enemy = function(x, y, speed) {
+    // Variables applied to each of our instances go here,
+    // we've provided one for you to get started
     this.x = x;
-    this.y = y + 55;
+    this.y = y;
     this.speed = speed;
+
+    // The image/sprite for our enemies, this uses
+    // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.step = 101;
-    this.boundary =  this.step * 5;
-    this.resetPos = -this.step;
 };
 
 // Update the enemy's position, required method for game
@@ -15,16 +17,21 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.x += this.speed * dt;
 
-    // If enemy is not passed boundary
-    if(this.x < this.boundary) {
-        // Move forward
-        // Increment x by speed * dt
-        this.x += this.speed * dt;
+    // when off canvas, reset position of enemy to move across again
+    if (this.x > 550) {
+        this.x = -100;
+        this.speed = 100 + Math.floor(Math.random() * 512);
     }
-    else {
-        // Reset pos to start
-        this.x = this.resetPos;
+
+    // Check for collision between player and enemies
+    if (player.x < this.x + 60 &&
+        player.x + 37 > this.x &&
+        player.y < this.y + 25 &&
+        30 + player.y > this.y) {
+        player.x = 200;
+        player.y = 380;
     }
 };
 
@@ -36,93 +43,69 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+var Player = function(x, y, speed) {
+    this.x = x;
+    this.y = y;
+    this.speed = speed;
+    this.sprite = 'images/char-boy.png';
+};
 
-// Player controlled character
-class Hero  {
-    constructor() {
-        this.sprite = 'images/char-boy.png';
-        this.step = 101;
-        this.jump = 83;
-        this.startX = this.step * 2;
-        this.startY = (this.jump * 4) + 55;
-        this.x = this.startX;
-        this.y = this.startY;
-        this.victory = false;
+Player.prototype.update = function() {
+    // Prevent player from moving beyond canvas wall boundaries
+    if (this.y > 380) {
+        this.y = 380;
     }
 
-    // Update position
-    update() {
-
-        // Check collision here
-        for(let enemy of allEnemies) {
-
-            // Did player x and y collide with enemy?
-            if (this.y === enemy.y && (enemy.x + enemy.step/2 > this.x && enemy.x < this.x + this.step/2) ) {
-                this.reset();
-            }
-        }
-
-         // Did player x and y reach final tile?
-        if(this.y === 55) {
-            this.victory = true;
-        }
-
+    if (this.x > 400) {
+        this.x = 400;
     }
 
-    // Draw hero sprite on current x and y coord position
-    render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    if (this.x < 0) {
+        this.x = 0;
     }
 
-    /**
-     * Update hero's x and y property according to input
-     *
-     * @param  {string} input - Direction to travel
-     */
-    handleInput(input) {
-        switch(input) {
-            case 'left':
-                if (this.x > 0) {
-                    this.x -= this.step;
-                }
-                break;
-            case 'up':
-                if (this.y > this.jump) {
-                    this.y -= this.jump;
-                }
-                break;
-            case 'right':
-                if (this.x < this.step * 4) {
-                    this.x += this.step;
-                }
-                break;
-            case 'down':
-                if (this.y < this.jump * 4) {
-                    this.y += this.jump;
-                }
-                break;
-        }
+    // Check for player reaching top of canvas and winning the game
+    if (this.y < 0) {
+        this.x = 200;
+        this.y = 380;
     }
+};
 
-    // Reset hero
-    reset() {
-        // Set x and y to starting x and y
-        this.y = this.startY;
-        this.X = this.startX;
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Player.prototype.handleInput = function(keyPress) {
+    switch (keyPress) {
+        case 'left':
+            this.x -= this.speed + 50;
+            break;
+        case 'up':
+            this.y -= this.speed + 30;
+            break;
+        case 'right':
+            this.x += this.speed + 50;
+            break;
+        case 'down':
+            this.y += this.speed + 30;
+            break;
     }
-
-}
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+var allEnemies = [];
 
-const player = new Hero();
-const bug1 = new Enemy(-101, 0, 200);
-const bug2 = new Enemy(-101, 83, 300);
-const bug3 = new Enemy((-101*2.5), 83, 300);
-const allEnemies = [];
-allEnemies.push(bug1,bug2,bug3);
+// Position "y" where the enemies will are created
+var enemyPosition = [60, 140, 220];
+var player = new Player(200, 380, 50);
+var enemy;
+
+enemyPosition.forEach(function(posY) {
+    enemy = new Enemy(0, posY, 100 + Math.floor(Math.random() * 512));
+    allEnemies.push(enemy);
+});
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
