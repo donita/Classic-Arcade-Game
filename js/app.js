@@ -34,17 +34,49 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 class Hero {
   constructor() {
-    this.x = 0;  //""""
-    this.y = 0; // top left corner of our canvas
     this.sprite = 'images/char-boy.png'; //inside the image folder
+    this.step = 101;
+    this.jump = 83;
+    this.startX = this.step * 2;
+    this.startY = (this.jump * 5) - 20;
+    this.x = this.startX;  //""""
+    this.y = this.startY; // top left corner of our canvas
+
 }
 
 render() {
-  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-  }
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
 }
-
-
+/**
+    * Update hero's x and y property according to input
+    *
+    * @param  {string} input - Direction to travel
+    */
+    handleInput(input) {
+      switch(input) {
+        case 'left':
+                  if (this.x > 0) {
+                      this.x -= this.step;
+                  }
+                  break;
+              case 'up':
+                  if (this.y > this.jump) {
+                      this.y -= this.jump;
+                  }
+                  break;
+              case 'right':
+                  if (this.x < this.step * 4) {
+                      this.x += this.step;
+                  }
+                  break;
+              case 'down':
+                  if (this.y < this.jump * 4) {
+                      this.y += this.jump;
+                  }
+                  break;
+          }
+      }
 //instantiate our enemies
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -55,12 +87,12 @@ render() {
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
+    var allowedKeys = {  //object with keypair number and strings
         37: 'left',
         38: 'up',
         39: 'right',
         40: 'down'
     };
 
-    player.handleInput(allowedKeys[e.keyCode]);
+    player.handleInput(allowedKeys[e.keyCode]); // a call to a player method
 });
