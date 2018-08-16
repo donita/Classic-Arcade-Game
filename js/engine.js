@@ -9,8 +9,9 @@
  * drawn but that is not the case. What's really happening is the entire "scene"
  * is being drawn over and over, presenting the illusion of animation.
  *
- * This engine makes the canvas' context (ctx) object globally available to make
- * writing app.js a little simpler to work with.
+ * This engine is available globally via the Engine variable and it also makes
+ * the canvas' context (ctx) object globally available to make writing app.js
+ * a little simpler to work with.
  */
 
 var Engine = (function(global) {
@@ -90,10 +91,10 @@ var Engine = (function(global) {
      * render methods.
      */
     function updateEntities(dt) {
-        //allEnemies.forEach(function(enemy) {
-            //enemy.update(dt);
-      //  });
-      //  player.update();
+        allEnemies.forEach(function(enemy) {
+            enemy.update(dt);
+        });
+        player.update();
     }
 
     /* This function initially draws the "game level", it will then call
@@ -117,9 +118,6 @@ var Engine = (function(global) {
             numRows = 6,
             numCols = 5,
             row, col;
-
-        // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
@@ -149,9 +147,9 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-        //allEnemies.forEach(function(enemy) {
-        //    enemy.render();
-      //});
+        allEnemies.forEach(function(enemy) {
+            enemy.render();
+        });
 
         player.render();
     }
@@ -168,7 +166,7 @@ var Engine = (function(global) {
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
      */
-    //Resources.load([
+    Resources.load([
         'images/stone-block.png',
         'images/water-block.png',
         'images/grass-block.png',
@@ -182,4 +180,4 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
-//})(this);
+})(this);
