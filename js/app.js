@@ -34,6 +34,7 @@ Enemy.prototype.render = function() {
 // a handleInput() method.
 class Hero {
   constructor() {
+<<<<<<< HEAD
     this.sprite = 'images/char-boy.png'; //inside the image folder
     this.step = 101;
     this.jump = 83;
@@ -77,6 +78,19 @@ render() {
                   break;
           }
       }
+=======
+    this.x = 0;  //""""
+    this.y = 0; // top left corner of our canvas
+    this.sprite = 'images/char-boy.png'; //inside the image folder
+}
+
+render() {
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  }
+}
+
+
+>>>>>>> dcd6dfbff2e7888b222c24cf36fe8fac5d09e856
 //instantiate our enemies
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
