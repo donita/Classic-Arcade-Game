@@ -43,6 +43,13 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+/**
+   * Player character
+   *
+   * @param  {int} x - x coord position
+   * @param  {int} y - y coord position
+   * @param  {string} sprite - Player sprite
+   */
 class Hero {
    contructor (x, y, speed) {
     this.x = x;
