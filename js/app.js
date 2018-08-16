@@ -23,6 +23,7 @@ Enemy.prototype.render = function() {
 
 // Now write your own player class
 // This class requires an update(), render() and a handleInput() method.
+
 class Hero {
   constructor(x, y) {
     this.x = 0;
@@ -34,6 +35,7 @@ class Hero {
   }
 }
 
+const player = new Hero();
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
