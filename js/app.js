@@ -44,14 +44,14 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 class Hero
-constructor (x, y, speed, sprite) {
+  constructor (x, y, speed, sprite) {
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.sprite = 'images/char-boy.png';
 };
 
-update = function(){
+update(){
     // Prevent player from moving beyond canvas wall boundaries
     if (this.y > 380) {
         this.y = 380;
@@ -72,11 +72,11 @@ update = function(){
     }
 };
 
-render = function() {
+render () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-handleInput = function(keyPress) {
+handleInput (keyPress) {
     switch (keyPress) {
         case 'left':
             this.x -= this.speed + 50;
