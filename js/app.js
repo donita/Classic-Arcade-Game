@@ -43,14 +43,15 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(x, y, speed) {
+class Hero
+constructor (x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.sprite = 'images/char-boy.png';
 };
 
-Player.prototype.update = function() {
+Hero.prototype.update = function() {
     // Prevent player from moving beyond canvas wall boundaries
     if (this.y > 380) {
         this.y = 380;
@@ -71,11 +72,11 @@ Player.prototype.update = function() {
     }
 };
 
-Player.prototype.render = function() {
+Hero.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Player.prototype.handleInput = function(keyPress) {
+Hero.prototype.handleInput = function(keyPress) {
     switch (keyPress) {
         case 'left':
             this.x -= this.speed + 50;
@@ -91,6 +92,8 @@ Player.prototype.handleInput = function(keyPress) {
             break;
     }
 };
+
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
