@@ -1,20 +1,15 @@
-
 // Enemies our player must avoid
-var Enemy = function(x, y, speed) {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
+class Enemy  {
+  constructor (x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-};
+  }
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
+update(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -34,24 +29,27 @@ Enemy.prototype.update = function(dt) {
         player.x = 200;
         player.y = 380;
     }
-};
+}
 
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
+render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+  }
+}
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(x, y, speed) {
+
+class Hero {
+  constructor(x, y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.sprite = 'images/char-boy.png';
-};
+  }
 
-Player.prototype.update = function() {
+update() {
     // Prevent player from moving beyond canvas wall boundaries
     if (this.y > 380) {
         this.y = 380;
@@ -70,13 +68,13 @@ Player.prototype.update = function() {
         this.x = 200;
         this.y = 380;
     }
-};
+}
 
-Player.prototype.render = function() {
+render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+}
 
-Player.prototype.handleInput = function(keyPress) {
+handleInput(keyPress) {
     switch (keyPress) {
         case 'left':
             this.x -= this.speed + 50;
@@ -91,17 +89,19 @@ Player.prototype.handleInput = function(keyPress) {
             this.y += this.speed + 30;
             break;
     }
-};
+}
+}
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var allEnemies = [];
+let allEnemies = [];
 
 // Position "y" where the enemies will are created
-var enemyPosition = [60, 140, 220];
-var player = new Player(200, 380, 50);
-var enemy;
+let enemyPosition = [60, 140, 220];
+const player = new Hero(200, 380, 50);
+let enemy;
 
 enemyPosition.forEach(function(posY) {
     enemy = new Enemy(0, posY, 100 + Math.floor(Math.random() * 512));
