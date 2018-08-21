@@ -99,7 +99,7 @@ handleInput(keyPress) {
 let allEnemies = [];
 
 // Position "y" where the enemies will are created
-let enemyPosition = [60, 140, 220];
+let enemyPosition = [70, 140, 220];
 const player = new Hero(200, 380, 50);
 let enemy;
 
