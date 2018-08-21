@@ -4,7 +4,8 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 
 
 
-[Screenshot](http://i67.tinypic.com/3305kw1.png)
+# Screenshot
+![Screenshot](http://i67.tinypic.com/3305kw1.png)
 
 
 # How to Run Application:
