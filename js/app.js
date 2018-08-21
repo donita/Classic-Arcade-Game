@@ -77,16 +77,16 @@ render() {
 handleInput(keyPress) {
     switch (keyPress) {
         case 'left':
-            this.x -= this.speed + 50;
+            this.x -= this.speed + 60;
             break;
         case 'up':
-            this.y -= this.speed + 30;
+            this.y -= this.speed + 40;
             break;
         case 'right':
-            this.x += this.speed + 50;
+            this.x += this.speed + 60;
             break;
         case 'down':
-            this.y += this.speed + 30;
+            this.y += this.speed + 40;
             break;
     }
 }
