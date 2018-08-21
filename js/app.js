@@ -89,16 +89,16 @@
 	handleInput(keyPress) {
 	    switch (keyPress) {
 	        case 'left':
-	            this.x -= this.speed + 60;
+	            this.x -= this.x + 60;
 	            break;
 	        case 'up':
-	            this.y -= this.speed + 40;
+	            this.y -= this.y + 40;
 	            break;
 	        case 'right':
-	            this.x += this.speed + 60;
+	            this.x += this.x + 60;
 	            break;
 	        case 'down':
-	            this.y += this.speed + 40;
+	            this.y += this.y + 40;
 	            break;
 	    }
 	}
